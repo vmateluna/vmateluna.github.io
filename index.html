@@ -1,40 +1,107 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Mis proyectos personales</title>
-	<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Práctica de Código Morse</title>
+    <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-	<header>
-		<h1>Mis proyectos personales</h1>
-	</header>
-	
-	<main>
-		<section>
-			<h2>Proyecto 1</h2>
-			<p>Descripción del proyecto 1.</p>
-			<a href="#">Ver proyecto</a>
-		</section>
-		
-		<section>
-			<h2>Proyecto 2</h2>
-			<p>Descripción del proyecto 2.</p>
-			<a href="#">Ver proyecto</a>
-		</section>
-		
-		<section>
-			<h2>Proyecto 3</h2>
-			<p>Descripción del proyecto 3.</p>
-			<a href="#">Ver proyecto</a>
-		</section>
-	</main>
-	
-	<footer>
-		<p>&copy; 2023 - Mi sitio web personal</p>
-	</footer>
-	
-	<script src="script.js"></script>
+    <header class="app-header">
+        <div>
+            <h1>Práctica de Código Morse</h1>
+            <p>Convierte texto, escucha Morse y practica con teclado o pantalla táctil.</p>
+        </div>
+        <button id="themeToggle" class="secondary-button" type="button">🌙 Tema oscuro</button>
+    </header>
+
+    <main class="layout">
+        <section class="card">
+            <h2>1. Texto a Morse</h2>
+            <label for="textInput">Texto a convertir</label>
+            <textarea id="textInput" rows="4" placeholder="Escribe una palabra o frase, por ejemplo: prueba"></textarea>
+
+            <div class="settings-grid">
+                <label>
+                    Velocidad: <span id="speedValue">18</span> WPM
+                    <input id="speedRange" type="range" min="8" max="35" value="18" />
+                </label>
+
+                <label>
+                    Frecuencia: <span id="frequencyValue">650</span> Hz
+                    <input id="frequencyRange" type="range" min="300" max="1000" step="10" value="650" />
+                </label>
+            </div>
+
+            <div class="button-row">
+                <button id="playButton" class="primary-button" type="button">▶ Reproducir Morse</button>
+                <button id="stopButton" class="danger-button" type="button">■ Detener</button>
+                <button id="clearTextButton" class="secondary-button" type="button">Limpiar</button>
+            </div>
+
+            <h3>Representación visual</h3>
+            <div id="morseVisual" class="morse-visual empty">Escribe texto para ver el Morse aquí.</div>
+        </section>
+
+        <section class="card">
+            <h2>2. Entrada manual</h2>
+            <p class="help-text">
+                En PC: mantén presionada la barra espaciadora. En móvil: mantén presionado el botón grande.
+                Pulsación corta = punto. Pulsación larga = raya.
+            </p>
+
+            <button id="morseKey" class="morse-key" type="button" aria-label="Botón de entrada Morse">
+                Mantener presionado
+            </button>
+
+            <div class="live-panel">
+                <div>
+                    <span class="panel-label">Símbolo actual</span>
+                    <div id="currentMorse" class="code-box">—</div>
+                </div>
+                <div>
+                    <span class="panel-label">Texto reconocido</span>
+                    <div id="recognizedText" class="code-box text-output">—</div>
+                </div>
+            </div>
+
+            <div id="feedback" class="feedback neutral">Presiona el botón o la barra espaciadora para comenzar.</div>
+
+            <div class="button-row">
+                <button id="newLetterButton" class="secondary-button" type="button">Cerrar letra</button>
+                <button id="newWordButton" class="secondary-button" type="button">Espacio palabra</button>
+                <button id="clearManualButton" class="danger-button" type="button">Limpiar práctica</button>
+            </div>
+        </section>
+
+        <section class="card practice-card">
+            <h2>3. Modo práctica</h2>
+            <p class="help-text">La aplicación muestra una palabra y tú debes escribirla en Morse usando la entrada manual.</p>
+
+            <div class="practice-target">
+                <span>Palabra objetivo</span>
+                <strong id="practiceWord">CASA</strong>
+            </div>
+
+            <div class="button-row">
+                <button id="newPracticeButton" class="primary-button" type="button">Nueva palabra</button>
+                <button id="checkPracticeButton" class="secondary-button" type="button">Verificar</button>
+            </div>
+
+            <div id="practiceFeedback" class="feedback neutral">Genera una palabra y escribe su Morse.</div>
+        </section>
+
+        <section class="card history-card">
+            <h2>4. Historial de intentos</h2>
+            <ul id="historyList" class="history-list"></ul>
+            <button id="clearHistoryButton" class="secondary-button" type="button">Borrar historial</button>
+        </section>
+    </main>
+
+    <footer class="app-footer">
+        <p>Aplicación local: no requiere servidor ni conexión a Internet.</p>
+    </footer>
+
+    <script src="app.js"></script>
 </body>
 </html>
